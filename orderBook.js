@@ -69,7 +69,7 @@ function handlePartialFulfillment(quantityLess, existingBook, incomingOrder) {
   }
 }
 
-//gets an order that might work for a beneficial mismatch fullfillment
+//gets an order for a beneficial mismatch fullfillment
 function getBenefitMatches(existingBook, incomingOrder) {
   return existingBook.filter((currentItem) => {
     const {
