@@ -69,7 +69,7 @@ function handlePartialFulfillment(quantityLess, existingBook, incomingOrder) {
   }
 }
 
-//gets an order that might can work for a beneficial mismatch fullfillment
+//gets an order that might work for a beneficial mismatch fullfillment
 function getBenefitMatches(existingBook, incomingOrder) {
   return existingBook.filter((currentItem) => {
     const {
@@ -113,23 +113,19 @@ function reconcileOrder(existingBook, incomingOrder) {
     return existingBook.concat(incomingOrder)
   }
 
-
   if (benefitMatch.length > 0) {
     return letsMakeADeal(benefitMatch, existingBook)
   }
-
 
   let quantityMatch = getQuantityMatching(matchingOrders, incomingOrder)
   if (quantityMatch.length > 0) {
     return handleQuantityMatch(quantityMatch, existingBook)
   }
 
-
   let quantityGreater = getQuantityGreaterThan(matchingOrders, incomingOrder)
   if (quantityGreater.length > 0) {
     return handleGreaterThan(quantityGreater, existingBook, incomingOrder)
   }
-
 
   let quantityLess = partialFulfillment(matchingOrders, incomingOrder)
   if (quantityLess.length > 0) {
