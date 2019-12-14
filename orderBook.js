@@ -53,6 +53,18 @@ function partialFulfillment(matchingOrders, incomingOrder) {
     return quantity < incomingOrder.quantity
   })
 }
+//gets an order for a beneficial mismatch fullfillment
+function getBenefitMatches(existingBook, incomingOrder) {
+  return existingBook.filter((currentItem) => {
+    const {
+      type,
+      quantity,
+      price
+    } = currentItem
+    return type !== incomingOrder.type && price > incomingOrder.price &&
+      price >= incomingOrder.price + 100 && quantity === incomingOrder.quantity
+  })
+}
 
 //function to partially fulfill Order
 function handlePartialFulfillment(quantityLess, existingBook, incomingOrder) {
@@ -69,19 +81,17 @@ function handlePartialFulfillment(quantityLess, existingBook, incomingOrder) {
   }
 }
 
-//gets an order for a beneficial mismatch fullfillment
-function getBenefitMatches(existingBook, incomingOrder) {
+
+// pulls orders that match in price but do not match in type
+function getMatchingOrders(existingBook, incomingOrder) {
   return existingBook.filter((currentItem) => {
     const {
       type,
-      quantity,
       price
     } = currentItem
-    return type !== incomingOrder.type && price > incomingOrder.price &&
-      price >= incomingOrder.price + 100 && quantity === incomingOrder.quantity
+    return type !== incomingOrder.type && price === incomingOrder.price
   })
 }
-
 function letsMakeADeal(benefitMatch, existingBook) {
   if (benefitMatch.length > 0) {
     for (var i = 0; i < existingBook.length; i++) {
@@ -94,16 +104,7 @@ function letsMakeADeal(benefitMatch, existingBook) {
   }
 }
 
-// pulls orders that match in price but do not match in type
-function getMatchingOrders(existingBook, incomingOrder) {
-  return existingBook.filter((currentItem) => {
-    const {
-      type,
-      price
-    } = currentItem
-    return type !== incomingOrder.type && price === incomingOrder.price
-  })
-}
+
 
 //pulls orders from existingBook that match in price and correspond in type
 function reconcileOrder(existingBook, incomingOrder) {
