@@ -53,7 +53,7 @@ function partialFulfillment(matchingOrders, incomingOrder) {
     return quantity < incomingOrder.quantity
   })
 }
-//gets an order for a beneficial mismatch fullfillment
+//gets an order for a beneficial fullfillment
 function getBenefitMatches(existingBook, incomingOrder) {
   return existingBook.filter((currentItem) => {
     const {
@@ -92,7 +92,7 @@ function getMatchingOrders(existingBook, incomingOrder) {
     return type !== incomingOrder.type && price === incomingOrder.price
   })
 }
-function letsMakeADeal(benefitMatch, existingBook) {
+function Deal(benefitMatch, existingBook) {
   if (benefitMatch.length > 0) {
     for (var i = 0; i < existingBook.length; i++) {
       if (existingBook[i].quantity === benefitMatch[0].quantity) {
@@ -115,7 +115,7 @@ function reconcileOrder(existingBook, incomingOrder) {
   }
 
   if (benefitMatch.length > 0) {
-    return letsMakeADeal(benefitMatch, existingBook)
+    return Deal(benefitMatch, existingBook)
   }
 
   let quantityMatch = getQuantityMatching(matchingOrders, incomingOrder)
