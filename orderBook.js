@@ -23,7 +23,7 @@ function handleQuantityMatch(quantityMatch, existingBook) {
 
 //quanity of matchingOrders is greater than incomingOrders
 function getQuantityGreaterThan(matchingOrders, incomingOrder) {
-  return matchingOrders.filter((currentItem) => { //returns a array with orders that have quantity greater than icomingOrders
+  return matchingOrders.filter((currentItem) => { 
     const {
       quantity
     } = currentItem
@@ -46,7 +46,7 @@ function handleGreaterThan(quantityGreater, existingBook, incomingOrder) {
 
 //function if quanity of incomingOrder is less than matchingOrder
 function partialFulfillment(matchingOrders, incomingOrder) {
-  return matchingOrders.filter((currentItem) => { //returns a array with orders that have 
+  return matchingOrders.filter((currentItem) => { 
     const {
       quantity
     } = currentItem
